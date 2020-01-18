@@ -1,0 +1,23 @@
+A simple bash script for bookmarking directories.
+Allows for easy navigation of distinct directories
+by letting you create a shortened name to navigate
+to them.
+
+Alias the script in your .bashrc to whatever name you
+want.  The program uses a text file to store
+all of the names and locations of the bookmarks.  
+The location of that file is the first line of the file.
+Change it to wherever you'd like, it doesn't have to be
+the same directory as the script.  Then, simply call
+the alias name you gave the program to get the help menu.
+
+It comes with a few simple options
+    -a NAME	bookmarks current directory with NAME
+    -r NAME	removes the bookmark NAME
+    -d		displays all bookmarks in a pager
+    -s NAME	searches for a bookmark with NAME
+    -h		prints the help menu
+
+To go to a bookmark just call ALIAS BMNAME, where ALIAS
+is the name you've given it and BMNAME is the name of a
+bookmark.
