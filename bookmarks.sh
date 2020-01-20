@@ -98,7 +98,25 @@ go_to_mark() {
 
 display_marks() {
     # display marks in less pager
-    less -K -m -c "$MARKS_DIR"
+	less -K -m -c "$MARKS_DIR"
+    }
+
+get_path() {
+    # check for NAME argument
+    if [[ -z $1 ]]; then
+	echo "NAME argument is required"
+	return 1
+    fi
+    # get the matching mark
+    mark=$(grep -m 1 -w ^$1 "$MARKS_DIR")
+    if [[ -z $mark ]]; then
+	echo "No bookmark with that NAME"
+	return 0
+    fi
+    parts=($mark)
+    location=${parts[1]}
+
+    echo $location
 }
 
 usage() {
@@ -112,6 +130,7 @@ help_msg() {
     echo -e "-r NAME \tremoves the bookmark NAME"
     echo -e "-d	\tdisplays all bookmarks in a pager"
     echo -e "-s NAME \tsearches for a bookmark with NAME"
+    echo -e "-p NAME \treturns PATH for bookmark with NAME"
     echo -e "-h	\tprints this menu"
 }
 
@@ -135,6 +154,10 @@ main() {
 		;;
 	    -s | --search)
 		grep $2 "$MARKS_DIR" 
+		shift
+		;;
+	    -p | --path)
+		get_path $2
 		shift
 		;;
 	    -h | --help)
